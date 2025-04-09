@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Bot Usage Statistics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            color: #333;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-decoration: underline;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #e0e0e0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TOSHI UPSCALE BOT LOGS</h1>
+        <p>TOTAL USERS: <span id="total-users">0</span></p>
+        <p>TOTAL REQUEST: <span id="total-requests">0</span></p>
+        <p>TOTAL ENHANCEMENT: <span id="total-enhancements">0</span></p>
+        <h2>LOGS TABLE</h2>
+        <table id="command-log">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Command Level</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+             
+            </tbody>
+        </table>
+        <div class="footer">
+            <p>&copy; TOSHI BNS @Nighative</p>
+        </div>
+    </div>
+
+    <script>
+        async function fetchStats() {
+            const response = await fetch('/api/stats');
+            const data = await response.json();
+
+            document.getElementById('total-users').innerText = data.userCount;
+            document.getElementById('total-requests').innerText = data.totalRequests;
+            document.getElementById('total-enhancements').innerText = data.totalEnhancements;
+
+            const commandLogTableBody = document.getElementById('command-log').querySelector('tbody');
+            data.commandLogs.forEach(log => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${log.username}</td>
+                    <td>${log.enhancementLevel}</td>
+                    <td>${log.timestamp}</td>
+                `;
+                commandLogTableBody.appendChild(row);
+            });
+        }
+
+        fetchStats();
+    </script>
+</body>
+</html>
