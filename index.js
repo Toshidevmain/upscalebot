@@ -75,7 +75,7 @@ bot.onText(/^(Light|Medium|Heavy)$/, async (msg, match) => {
     }, 1000);
 
     try {
-        const response = await axios.get(`${ZETSU_API_URL}?url=${encodeURIComponent(photoData.url)}&level=${enhancementLevel}&apikey=9c0d78f4102670b79da287a127581d81`);
+        const response = await axios.get(`${ZETSU_API_URL}?url=${encodeURIComponent(photoData.url)}&level=${enhancementLevel}&apikey=8933abbc66c727718e73a9705eef5086`);
 
         clearInterval(countdownInterval);
 
