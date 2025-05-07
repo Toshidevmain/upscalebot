@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 const TelegramBot = require('node-telegram-bot-api');
 
-const bot = new TelegramBot('7766519655:AAEYvzP5cx0yz9p1Hvudf_ARW-PWR9T1F9c', { polling: true });
+const bot = new TelegramBot('7766519655:AAHvODWpX3EWY6apdeH7MwiHbxKVQ0Qjli4', { polling: true });
 
 const ZETSU_API_URL = 'https://api.zetsu.xyz/tools/restore';
 
